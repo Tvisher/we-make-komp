@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeMake - Расчет стоимости интернет-магазина</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.min.css">
+    <script> </script>
+</head>
+
+<body>
+    <header> </header>
+
+    <main>
+        <section class="calc no-print">
+            <div class="calc__content">
+                <div class="container">
+                    <div class="calc__wrapper">
+                        <div class="calc__inner-data">
+                            <h1 class="calc__title">Генерация КП</h1>
+
+                            <label class="styles-input">
+                                <input type="text" autocomplete="off" data-styles-field placeholder=" " id="kpType">
+                                <span class="styles-text">Заголовок КП</span>
+                            </label>
+
+                            <div class="area-field" style="margin-top: 0; margin-bottom: 20px;">
+                                <textarea placeholder=" " id="klpDescr"></textarea>
+                                <span class="styles-text">Описание КП</span>
+                            </div>
+
+                            <label class="styles-input">
+                                <input type="text" autocomplete="off" data-styles-field placeholder=" " id="companyName">
+                                <span class="styles-text">Наименование клиента</span>
+                            </label>
+
+                            <label class="styles-input">
+                                <input type="text" autocomplete="off" class="number-mask" data-styles-field placeholder=" " id="implementationPeriod">
+                                <span class="styles-text">Срок выполнения проекта</span>
+                            </label>
+
+                            <label class="styles-input">
+                                <input type="text" autocomplete="off" class="number-mask" data-styles-field placeholder=" " id="developmentDiscount">
+                                <span class="styles-text">Скидка на разработку %</span>
+                            </label>
+
+                            <div class="solution" data-priority="16">
+                                <div class="wrap">
+                                    <span class="solution-title" style="line-height: 120%; margin-bottom: 20px;">Добавить услугу</span>
+                                </div>
+                                <label class="styles-input styles-input__title">
+                                    <input type="text" data-styles-field placeholder=" " id="solutionTitle">
+                                    <span class="styles-text">Заголовок услуги</span>
+                                </label>
+                                <div class="area-field">
+                                    <textarea placeholder=" " id="solutionArea"></textarea>
+                                    <span class="styles-text">Описание услуги</span>
+                                </div>
+                                <div class="solution__footer">
+                                    <label class="styles-input">
+                                        <input type="text" data-styles-field placeholder=" " id="solutionPrice">
+                                        <span class="styles-text">Стоимость услуги</span>
+                                    </label>
+                                    <button class="btn" data-add-solution>Добавить в смету</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calc__outer-data">
+                            <h2 class="outer-data__title">Предпросмотр КП</h2>
+                            <div class="result-list__wrap">
+                                <ul class="result-list" id="estimatePreview">
+                                </ul>
+                            </div>
+                            <div class="calc-result">
+                                <div class="field-price">
+                                    Стоимость:<span data-field-price></span>₸
+                                </div>
+                                <div class="field-sale" data-field-sale>
+
+                                </div>
+                                <div class="field-total-price">
+                                    Итоговая стоимость:<span data-field-total-price></span>₸
+                                </div>
+                            </div>
+                            <div class="btns-wrapper">
+                                <button class="btn" data-print-offer>Сформировать КП</button>
+                                <button class="btn" data-update-offer>Обновить расчёт</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="offer-doc" class="offer-doc no-print">
+            <div class="container">
+                <div class="offer-doc__head">
+                    <div class="offer-doc__logo">
+                        <img src="@img/logo.svg" alt="">
+                    </div>
+                    <div class="offer-doc__company-data">
+                        <span>Натальчук Денис Валерьевич</span>
+                        <span>+7 (777) 541-09-00</span>
+                        <a href="mailto:natalchuk@wemake.kz" class="blue-tdu">natalchuk@wemake.kz</a>
+                    </div>
+                </div>
+                <div class="offer-doc__title" data-id="kpType"></div>
+                <div class="offer-doc__info-fields">
+                    <div class="offer-doc__info-field">
+                        Дата составления КП:
+                        <span class="bold-text" data-id="currentDate">!</span>
+                    </div>
+                    <div class="offer-doc__info-field">
+                        Клиент:
+                        <span class="bold-text" data-id="companyName">!</span>
+                    </div>
+                </div>
+                <div class="offer-doc__descr" data-id="klpDescr">Предлагаем Вам разработать стильный интернет-магазин на основе готового
+                    решения. Наша команда с опытом разработки более 8 лет разработает весь
+                    необходимый функционал полноценного интернет-магазина за короткий срок.
+                </div>
+                <span class="offer-title">Что будет реализовано:</span>
+                <table class="offer-doc__table">
+                    <thead>
+                        <tr>
+                            <th style="width:30%;">Услуга</th>
+                            <th style="width:59%;">Описание</th>
+                            <!-- <th style="width:9%;">Кол-во </th> -->
+                            <th style="width:11%;">Стоимость</th>
+                        </tr>
+                    </thead>
+                    <tbody data-render-rows></tbody>
+                </table>
+                <div class="offer-doc__footer">
+                    <span class="boss-name">
+                        С уважением,<br>Натальчук Д.В.
+                    </span>
+                    <div class="offer-doc__seal">
+                        <img src="@img/seal.png" alt="">
+                    </div>
+                    <div class="offer-doc__res">
+                        <div class="res-block">Итого:&nbsp;<span data-total-res>0</span>&nbsp;<span>₸</span></div>
+                        <div class="res-block" data-sale-res></div>
+                        <div class="res-block" data-implementation-period></div>
+                        <div class="res-block">Итоговая стоимость:&nbsp;<span data-final-res> 2 751 200</span>&nbsp;<span>₸</spa>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer> </footer>
+</body>
+
+<div class="login-modal show" id="login-modal">
+    <div class="login-modal__content">
+        <div class="login-modal__form">
+            <label class="modal-field">
+                <span class="modal-field__text"></span>
+                <input id="passordField" type="password" name="password" placeholder="Введите пароль">
+            </label>
+            <button type="button" id="loginBtn" class="btn">Авторизация</button>
+        </div>
+    </div>
+</div>
+<script src="./js/app.min.js"></script>
+
+</html>
