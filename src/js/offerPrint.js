@@ -82,7 +82,7 @@ export default function offerPrint(estimateData) {
     dataTotalRes.innerHTML = totalRes.toLocaleString('RU-ru');
 
     const saleRes = (totalRes / 100) * discountInput.value;
-    dataSaleRes.innerHTML = saleRes > 0 ? `Скидка:&nbsp;<span>${saleRes.toLocaleString('RU-ru')}</span>&nbsp;<span>₸</span>` : '';
+    dataSaleRes.innerHTML = saleRes > 0 ? `Скидка ${discountInput.value}% :&nbsp;<span>${saleRes.toLocaleString('RU-ru')}</span>&nbsp;<span>₸</span>` : '';
     dataFinalRes.innerHTML = (totalRes - saleRes).toLocaleString('RU-ru');
 
     // Печать документа
