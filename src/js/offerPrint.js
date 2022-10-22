@@ -80,9 +80,10 @@ export default function offerPrint(estimateData) {
         return acc + +item.optionPrice;
     }, 0);
     dataTotalRes.innerHTML = totalRes.toLocaleString('RU-ru');
-
-    const saleRes = (totalRes / 100) * discountInput.value;
-    dataSaleRes.innerHTML = saleRes > 0 ? `Скидка ${discountInput.value}% :&nbsp;<span>${saleRes.toLocaleString('RU-ru')}</span>&nbsp;<span>₸</span>` : '';
+    const discountInputValue = discountInput.value.split(' ')
+        .join('');
+    const saleRes = (totalRes / 100) * discountInputValue;
+    dataSaleRes.innerHTML = saleRes > 0 ? `Скидка ${discountInputValue}% :&nbsp;<span>${saleRes.toLocaleString('RU-ru')}</span>&nbsp;<span>₸</span>` : '';
     dataFinalRes.innerHTML = (totalRes - saleRes).toLocaleString('RU-ru');
 
     // Печать документа

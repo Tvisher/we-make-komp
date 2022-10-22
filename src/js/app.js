@@ -123,7 +123,8 @@ function initApp() {
         const priceWidthoutSale = dataArr.reduce((acc, service) => {
             return acc + Number(service.optionPrice);
         }, 0);
-        const discount = discountInput.value.trim();
+        const discount = discountInput.value.trim().split(' ')
+            .join('');;
         const sale = (priceWidthoutSale / 100) * discount;
 
         const totalPrice = priceWidthoutSale - sale;
