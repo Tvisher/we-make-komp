@@ -1679,12 +1679,11 @@ body {
 }
 
 main {
-  display: none;
+  flex-direction: column;
+  display: flex;
 }
 
 main.load {
-  flex-direction: column;
-  display: flex;
   animation: fromOpacity 0.6s ease-in-out forwards;
 }
 
@@ -1809,7 +1808,6 @@ li {
   height: calc(100vh - 30px);
   position: sticky;
   top: 0;
-  display: none;
   flex: 0 0 50%;
 }
 
@@ -2192,22 +2190,39 @@ input[type=number]:focus {
 }
 
 .result-list .list-item__head {
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   display: flex;
 }
 
-.result-list .list-item__head .show_more {
+.result-list .list-item__head .list-item__delete {
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
   width: 32px;
   height: 32px;
   background: #303032;
   border-radius: 50%;
-  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3e%3cpath fill='%23DD2E44' d='M21.533 18.002L33.768 5.768c.976-.976.976-2.559 0-3.535-.977-.977-2.559-.977-3.535 0L17.998 14.467 5.764 2.233c-.976-.977-2.56-.977-3.535 0-.977.976-.977 2.559 0 3.535l12.234 12.234L2.201 30.265c-.977.977-.977 2.559 0 3.535.488.488 1.128.732 1.768.732s1.28-.244 1.768-.732l12.262-12.263 12.234 12.234c.488.488 1.128.732 1.768.732.64 0 1.279-.244 1.768-.732.976-.977.976-2.559 0-3.535L21.533 18.002z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='32' height='33' viewBox='0 0 32 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect y='0.5' width='32' height='32' rx='16' fill='%23BE2B2F'/%3e%3cpath d='M17.4136 16.4998L19.9996 13.9112C20.1675 13.7203 20.2564 13.4727 20.2483 13.2187C20.2402 12.9647 20.1356 12.7232 19.9559 12.5435C19.7762 12.3638 19.5347 12.2592 19.2807 12.2511C19.0267 12.243 18.7791 12.3319 18.5882 12.4998L15.9996 15.0858L13.4062 12.4918C13.3133 12.399 13.2031 12.3253 13.0817 12.275C12.9603 12.2247 12.8303 12.1989 12.6989 12.1989C12.5675 12.1989 12.4375 12.2247 12.3161 12.275C12.1947 12.3253 12.0845 12.399 11.9916 12.4918C11.8987 12.5847 11.825 12.695 11.7747 12.8164C11.7245 12.9377 11.6986 13.0678 11.6986 13.1992C11.6986 13.3305 11.7245 13.4606 11.7747 13.582C11.825 13.7033 11.8987 13.8136 11.9916 13.9065L14.5856 16.4998L11.9996 19.0878C11.8981 19.1785 11.8163 19.2889 11.759 19.4123C11.7017 19.5357 11.6702 19.6694 11.6664 19.8054C11.6626 19.9414 11.6866 20.0767 11.7369 20.2031C11.7872 20.3295 11.8627 20.4443 11.9589 20.5405C12.0551 20.6367 12.1699 20.7122 12.2963 20.7625C12.4227 20.8128 12.558 20.8368 12.694 20.833C12.83 20.8292 12.9637 20.7977 13.0871 20.7404C13.2105 20.6831 13.3209 20.6013 13.4116 20.4998L15.9996 17.9138L18.5849 20.4998C18.7725 20.6874 19.0269 20.7928 19.2922 20.7928C19.5575 20.7928 19.812 20.6874 19.9996 20.4998C20.1872 20.3122 20.2926 20.0578 20.2926 19.7925C20.2926 19.5272 20.1872 19.2728 19.9996 19.0852L17.4136 16.4998Z' fill='white'/%3e%3c/svg%3e ");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 10px;
+  background-size: cover;
+}
+
+.result-list .list-item__head .list-item__edit {
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  background: #303032;
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='32' height='33' viewBox='0 0 32 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect y='0.5' width='32' height='32' rx='16' fill='%230463F1'/%3e%3cg clip-path='url(%23clip0_2802_1013)'%3e%3cpath d='M23.216 9.284C22.7064 8.7971 22.0288 8.52539 21.324 8.52539C20.6192 8.52539 19.9416 8.7971 19.432 9.284L9.07401 19.642C8.73262 19.9815 8.46192 20.3853 8.27757 20.8301C8.09323 21.2749 7.99889 21.7519 8.00001 22.2333V23.5C8.00001 23.7652 8.10537 24.0196 8.2929 24.2071C8.48044 24.3946 8.73479 24.5 9.00001 24.5H10.2667C10.7484 24.5013 11.2256 24.407 11.6706 24.2227C12.1156 24.0383 12.5197 23.7676 12.8593 23.426L23.216 13.068C23.7171 12.5658 23.9985 11.8854 23.9985 11.176C23.9985 10.4666 23.7171 9.78617 23.216 9.284V9.284ZM11.444 22.012C11.1309 22.323 10.708 22.4984 10.2667 22.5H10V22.2333C10.0014 21.7916 10.1767 21.3681 10.488 21.0547L18.2 13.3447L19.1553 14.3L11.444 22.012ZM21.8 11.654L20.5693 12.8867L19.6133 11.9307L20.8467 10.7C20.9753 10.5771 21.1464 10.5084 21.3243 10.5084C21.5023 10.5084 21.6734 10.5771 21.802 10.7C21.9277 10.827 21.9981 10.9987 21.9977 11.1774C21.9974 11.3562 21.9263 11.5275 21.8 11.654V11.654Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_2802_1013'%3e%3crect width='16' height='16' fill='white' transform='translate(8 8.5)'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e ");
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.result-list .list-item.editing .list-item__edit {
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='32' height='33' viewBox='0 0 32 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect y='0.5' width='32' height='32' rx='16' fill='%2328BE40'/%3e%3cg clip-path='url(%23clip0_2802_1012)'%3e%3cpath d='M13.1661 22.275C12.712 22.2752 12.2764 22.0947 11.9555 21.7733L8.29537 18.1145C7.90154 17.7205 7.90154 17.0819 8.29537 16.688C8.68933 16.2941 9.32794 16.2941 9.72189 16.688L13.1661 20.1322L22.2781 11.0202C22.6721 10.6264 23.3107 10.6264 23.7046 11.0202C24.0985 11.4142 24.0985 12.0528 23.7046 12.4467L14.3768 21.7733C14.0559 22.0947 13.6203 22.2752 13.1661 22.275Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_2802_1012'%3e%3crect width='16' height='16' fill='white' transform='translate(8 8.5)'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e ");
 }
 
 .result-list .list-item__nameplate {
@@ -2521,8 +2536,6 @@ input[type=number]:focus {
 
 .calc-result {
   margin-top: auto;
-  opacity: 0;
-  visibility: hidden;
   transition: all 0.4s ease-in-out;
 }
 
@@ -2538,7 +2551,6 @@ input[type=number]:focus {
 .offer-doc {
   flex: 0 0 100%;
   font-family: "Montserrat", sans-serif;
-  display: none;
 }
 
 .offer-doc.print {
@@ -2972,6 +2984,22 @@ td {
   align-items: center;
 }
 
+.editing-input,
+.editing-area {
+  width: fit-content;
+  background: transparent;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #767676;
+}
+
+.editing-area {
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     max-width: 98%;
@@ -3025,7 +3053,7 @@ td {
     display: block;
   }
 
-  .no-print {
+  .noPrint {
     display: none;
   }
 

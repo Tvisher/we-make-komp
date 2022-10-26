@@ -15,7 +15,7 @@ function initApp() {
     });
 
     // Плавное появление контента при загрузке страницы
-    $('main').addClass('load');
+    // $('main').addClass('load');
 
     // HTML поля вывода данных
     const culcResultArea = document.querySelector('.calc-result');
