@@ -176,7 +176,7 @@
                         </div>
                         <div class="offer-doc__res">
                             <div class="res-block" v-if="discountPrecent">Итого:&nbsp;<span>{{offerPrice.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸</span></div>
-                            <div class="res-block" v-if="discountPrecent"> Скидка {{discountPrecent}} % :<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>&nbsp;₸</div>
+                            <div class="res-block" v-if="discountPrecent"> Скидка {{discountPrecent}} % :&nbsp;<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>&nbsp;₸</div>
                             <div class="res-block" v-if="projectDeadline">Срок разработки:&nbsp;<span>{{projectDeadline}} рабочих дней</span></div>
                             <div class="res-block">Итоговая стоимость:&nbsp;<span>{{offerPriceWithDiscount.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸</spa>
                             </div>
