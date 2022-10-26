@@ -2458,11 +2458,29 @@ input[type=number]:focus {
 }
 
 .list-item {
-  animation: toOpac 0.8s ease-in-out forwards;
+  display: flex;
+  padding-left: 0 !important;
 }
 
-.list-item.show .show_more {
-  transform: rotate(180deg);
+.list-item__wrapper {
+  width: 100%;
+}
+
+.handle {
+  cursor: grab;
+  padding: 0px 10px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.handle span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(212, 212, 212);
 }
 
 .list-item[data-present=true] .is-price {
@@ -2943,7 +2961,6 @@ td {
 .login-modal {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   z-index: 999;
   position: fixed;
   left: 0;

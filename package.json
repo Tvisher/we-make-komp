@@ -18,7 +18,8 @@
     "imask": "^6.4.2",
     "jquery": "^3.6.0",
     "modal-video": "^2.4.6",
-    "package": "^1.0.1"
+    "package": "^1.0.1",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.10",

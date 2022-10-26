@@ -73,32 +73,41 @@
                             <div class="calc__outer-data" v-show="services.length">
                                 <h2 class="outer-data__title">Предпросмотр КП</h2>
                                 <div class="result-list__wrap">
-                                    <ul class="result-list" id="estimatePreview">
-                                        <li class="list-item" v-for="service in services" :key="service.serviceId" :class="{editing:service.isEdited}">
-                                            <div class="list-item__head">
-                                                <div class="list-item__block list-item__name">
-                                                    <span class="list-item__nameplate">Наименование услуги</span>
-                                                    <div class="list-item__data" v-show="!service.isEdited">{{service.serviceTitle}}</div>
-                                                    <input type="text" v-show="service.isEdited" v-model="service.serviceTitle" class="editing-input">
+                                    <draggable class="result-list" :list="services" item-key="serviceId" handle=".handle">
+                                        <template #item="{ element }">
+                                            <li class="list-item" :class="{editing:element.isEdited}">
+                                                <div class="handle">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
                                                 </div>
-                                                <div class="list-item__block">
-                                                    <span class="list-item__nameplate">Стоимость</span>
-                                                    <div class="list-item__data is-price" v-show="!service.isEdited">{{service.servicePrice.toLocaleString('RU-ru')}} ₸</div>
-                                                    <input type="number" v-show="service.isEdited" v-model="service.servicePrice" class="editing-input">
+                                                <div class="list-item__wrapper">
+                                                    <div class="list-item__head">
+                                                        <div class="list-item__block list-item__name">
+                                                            <span class="list-item__nameplate">Наименование услуги</span>
+                                                            <div class="list-item__data" v-show="!element.isEdited">{{element.serviceTitle}}</div>
+                                                            <input type="text" v-show="element.isEdited" v-model="element.serviceTitle" class="editing-input">
+                                                        </div>
+                                                        <div class="list-item__block">
+                                                            <span class="list-item__nameplate">Стоимость</span>
+                                                            <div class="list-item__data is-price" v-show="!element.isEdited">{{element.servicePrice.toLocaleString('RU-ru')}} ₸</div>
+                                                            <input type="number" v-show="element.isEdited" v-model="element.servicePrice" class="editing-input">
+                                                        </div>
+                                                        <div class="list-item__delete" @click="deleteservice(element.serviceId)"></div>
+                                                        <div class="list-item__edit" @click="element.isEdited = !element.isEdited, saveСhanges(element)"></div>
+                                                    </div>
+                                                    <div class="list-item__footer">
+                                                        <div class="list-item__descr" v-html="element.serviceDescription" v-show="!element.isEdited"></div>
+                                                        <textarea class="editing-area" v-model="element.modifyServiceDescription" v-show="element.isEdited"></textarea>
+                                                    </div>
                                                 </div>
-                                                <div class="list-item__delete" @click="deleteservice(service.serviceId)"></div>
-                                                <div class="list-item__edit" @click="service.isEdited = !service.isEdited, saveResult(service)"></div>
-                                            </div>
-                                            <div class="list-item__footer">
-                                                <div class="list-item__descr" v-html="service.serviceDescription" v-show="!service.isEdited"></div>
-                                                <textarea class="editing-area" v-model="service.modifyServiceDescription" v-show="service.isEdited"></textarea>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </template>
+                                    </draggable>
                                 </div>
                                 <div class="calc-result">
-                                    <div class="field-price">
-                                        Стоимость:<span>{{offerPrice}}</span>₸
+                                    <div class="field-price" v-if="discountPrecent">
+                                        Стоимость:<span>{{offerPrice.toLocaleString('RU-ru')}}</span>₸
                                     </div>
                                     <div class="field-sale" v-if="discountPrecent">
                                         Скидка {{discountPrecent}} % :<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>₸
@@ -166,10 +175,10 @@
                             <img src="@img/seal.png" alt="">
                         </div>
                         <div class="offer-doc__res">
-                            <div class="res-block">Итого:&nbsp;<span>{{offerPrice}}</span>&nbsp;<span>₸</span></div>
-                            <div class="res-block" v-if="discountPrecent"> Скидка {{discountPrecent}} % :&nbsp;<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>&nbsp;₸</div>
+                            <div class="res-block" v-if="discountPrecent">Итого:&nbsp;<span>{{offerPrice.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸</span></div>
+                            <div class="res-block" v-if="discountPrecent"> Скидка {{discountPrecent}} % :<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>&nbsp;₸</div>
                             <div class="res-block" v-if="projectDeadline">Срок разработки:&nbsp;<span>{{projectDeadline}} рабочих дней</span></div>
-                            <div class="res-block">Итоговая стоимость:&nbsp;<span>{{offerPriceWithDiscount}}</span>&nbsp;<span>₸</spa>
+                            <div class="res-block">Итоговая стоимость:&nbsp;<span>{{offerPriceWithDiscount.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸</spa>
                             </div>
                         </div>
                     </div>
@@ -180,7 +189,7 @@
     <footer> </footer>
 </body>
 
-<!-- <div class="login-modal show" id="login-modal">
+<div class="login-modal show" id="login-modal">
     <div class="login-modal__content">
         <div class="login-modal__form">
             <label class="modal-field">
@@ -190,13 +199,16 @@
             <button type="button" id="loginBtn" class="btn">Авторизация</button>
         </div>
     </div>
-</div> -->
-<!-- <script src="./js/app.min.js"></script> -->
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.global.min.js" integrity="sha512-lgbnN1gNswbc8DPmFF2F9n951EGPK0p9PmPkzECHyjC4bmv6Be6ezWQB7mIjPJ5pAdYehSj+Nm0brW0NjCoFmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script defer>
-    Vue.createApp({
+<script src="./js/app.min.js"></script>
+
+<script>
+    const draggable = window.draggable;
+
+    const vueApp = Vue.createApp({
         data() {
             return {
                 services: [],
@@ -213,8 +225,12 @@
                 toPrint: false,
             }
         },
+        components: {
+            draggable
+        },
         methods: {
-            saveResult(service) {
+
+            saveСhanges(service) {
                 this.calcResult()
                 this.services.forEach(item => {
                     if (item.serviceId === service.serviceId) {
@@ -303,7 +319,30 @@
                 return Day + " " + fMonth + " " + Year + " года";
             },
         },
-    }).mount('#app')
+    });
+
+
+    const someString = 'Voxel987=';
+    const loginModal = document.querySelector('#login-modal');
+    const loginBtn = document.querySelector('#loginBtn');
+
+    if (sessionStorage.getItem('loginTrue')) {
+        loginModal.classList.remove('show');
+        vueApp.mount('#app');
+    } else {
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const someStringValue = document.querySelector('#passordField').value.trim();
+            if (someStringValue === someString) {
+                loginModal.classList.remove('show');
+                vueApp.mount('#app');
+                sessionStorage.setItem('loginTrue', true);
+            } else {
+                alert('Пароль не верный!');
+            }
+        });
+    }
+
 </script>
 
 </html>
