@@ -3089,6 +3089,10 @@ td {
   display: none;
 }
 
+.offer-doc__descr.cursive {
+  font-style: italic;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     max-width: 98%;

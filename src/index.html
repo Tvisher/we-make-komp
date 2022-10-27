@@ -33,6 +33,10 @@
                                     <textarea placeholder=" " id="klpDescr" v-model="offerDescr"></textarea>
                                     <span class="styles-text">Описание КП</span>
                                 </div>
+                                <div class="area-field" style="margin-top: 0; margin-bottom: 20px;">
+                                    <textarea placeholder=" " v-model="footnote"></textarea>
+                                    <span class="styles-text">Сноска под таблицей</span>
+                                </div>
 
                                 <label class="styles-input">
                                     <input type="text" autocomplete="off" data-styles-field placeholder=" " id="companyName" v-model="clientName">
@@ -148,18 +152,18 @@
                             <a href="mailto:natalchuk@wemake.kz" class="blue-tdu">natalchuk@wemake.kz</a>
                         </div>
                     </div>
-                    <div class="offer-doc__title" data-id="kpType">{{offerTitle}}</div>
+                    <div class="offer-doc__title">{{offerTitle}}</div>
                     <div class="offer-doc__info-fields">
                         <div class="offer-doc__info-field">
                             Дата составления КП:
-                            <span class="bold-text" data-id="currentDate">{{getCurrentDate()}}</span>
+                            <span class="bold-text">{{getCurrentDate()}}</span>
                         </div>
                         <div class="offer-doc__info-field">
                             Клиент:
-                            <span class="bold-text" data-id="companyName">{{clientName}}</span>
+                            <span class="bold-text">{{clientName}}</span>
                         </div>
                     </div>
-                    <div class="offer-doc__descr" data-id="klpDescr">{{offerDescr}}</div>
+                    <div class="offer-doc__descr">{{offerDescr}}</div>
                     <span class="offer-title">Что будет реализовано:</span>
                     <table class="offer-doc__table">
                         <thead>
@@ -179,6 +183,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="offer-doc__descr cursive">* {{footnote}}</div>
                     <div class="offer-doc__footer">
                         <span class="boss-name">
                             С уважением,<br>Натальчук Д.В.
@@ -237,6 +242,7 @@
                 period: 'fix',
                 periodText: '',
                 toPrint: false,
+                footnote: '',
             }
         },
         components: {
