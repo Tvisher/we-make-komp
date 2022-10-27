@@ -3017,6 +3017,78 @@ td {
   min-height: 100px;
 }
 
+.radio-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.radio-switch input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.solution__footer {
+  align-items: center;
+}
+
+.thead-row th:nth-of-type(1),
+.thead-row td:nth-of-type(1),
+.tbody-row th:nth-of-type(1),
+.tbody-row td:nth-of-type(1) {
+  width: 30%;
+}
+
+.thead-row th:nth-of-type(2),
+.thead-row td:nth-of-type(2),
+.tbody-row th:nth-of-type(2),
+.tbody-row td:nth-of-type(2) {
+  width: 59%;
+}
+
+.thead-row th:nth-of-type(3),
+.thead-row td:nth-of-type(3),
+.tbody-row th:nth-of-type(3),
+.tbody-row td:nth-of-type(3) {
+  width: 11%;
+}
+
+.thead-row.year th:nth-of-type(1),
+.thead-row.year td:nth-of-type(1),
+.thead-row.month th:nth-of-type(1),
+.thead-row.month td:nth-of-type(1),
+.tbody-row.year th:nth-of-type(1),
+.tbody-row.year td:nth-of-type(1),
+.tbody-row.month th:nth-of-type(1),
+.tbody-row.month td:nth-of-type(1) {
+  width: 40%;
+}
+
+.thead-row.year th:nth-of-type(2),
+.thead-row.year td:nth-of-type(2),
+.thead-row.month th:nth-of-type(2),
+.thead-row.month td:nth-of-type(2),
+.tbody-row.year th:nth-of-type(2),
+.tbody-row.year td:nth-of-type(2),
+.tbody-row.month th:nth-of-type(2),
+.tbody-row.month td:nth-of-type(2) {
+  width: 60%;
+}
+
+.thead-row.year th:nth-of-type(3),
+.thead-row.year td:nth-of-type(3),
+.thead-row.month th:nth-of-type(3),
+.thead-row.month td:nth-of-type(3),
+.tbody-row.year th:nth-of-type(3),
+.tbody-row.year td:nth-of-type(3),
+.tbody-row.month th:nth-of-type(3),
+.tbody-row.month td:nth-of-type(3) {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     max-width: 98%;

@@ -66,6 +66,18 @@
                                             <input type="number" data-styles-field placeholder=" " v-model="servicePrice">
                                             <span class="styles-text">Стоимость услуги</span>
                                         </label>
+                                        <label class="radio-switch">
+                                            <span>Фикс</span>
+                                            <input checked type="radio" name="period" value="fix" @input="getPeriod">
+                                        </label>
+                                        <label class="radio-switch">
+                                            <span>В месяц</span>
+                                            <input type="radio" name="period" value="month" @input="getPeriod">
+                                        </label>
+                                        <label class="radio-switch">
+                                            <span>В год</span>
+                                            <input type="radio" name="period" value="year" @input="getPeriod">
+                                        </label>
                                         <button class="btn" @click="addService">Добавить в смету</button>
                                     </div>
                                 </div>
@@ -107,13 +119,13 @@
                                 </div>
                                 <div class="calc-result">
                                     <div class="field-price" v-if="discountPrecent">
-                                        Стоимость:<span>{{offerPrice.toLocaleString('RU-ru')}}</span>₸
+                                        Стоимость:<span>{{offerPrice.toLocaleString('RU-ru')}}</span>₸ {{periodText}}
                                     </div>
                                     <div class="field-sale" v-if="discountPrecent">
                                         Скидка {{discountPrecent}} % :<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>₸
                                     </div>
                                     <div class="field-total-price">
-                                        Итоговая стоимость:<span>{{offerPriceWithDiscount.toLocaleString('RU-ru')}}</span>₸
+                                        Итоговая стоимость:<span>{{offerPriceWithDiscount.toLocaleString('RU-ru')}}</span>₸ {{periodText}}
                                     </div>
                                 </div>
                                 <div class="btns-wrapper">
@@ -124,7 +136,7 @@
                     </div>
                 </div>
             </section>
-            <section id="offer-doc" class="offer-doc" v-if="toPrint">
+            <section id="offer-doc" class="offer-doc" v-show="toPrint">
                 <div class="container">
                     <div class="offer-doc__head">
                         <div class="offer-doc__logo">
@@ -151,14 +163,14 @@
                     <span class="offer-title">Что будет реализовано:</span>
                     <table class="offer-doc__table">
                         <thead>
-                            <tr>
-                                <th style="width:30%;">Услуга</th>
-                                <th style="width:59%;">Описание</th>
-                                <th style="width:11%;">Стоимость</th>
+                            <tr :class="period" class="thead-row">
+                                <th>Услуга</th>
+                                <th>Описание</th>
+                                <th>Стоимость</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="service in services" :key="service.serviceId">
+                            <tr :class="period" class="tbody-row" v-for="service in services" :key="service.serviceId">
                                 <td>
                                     <span class="setvise-table-title">{{service.serviceTitle}}</span>
                                 </td>
@@ -175,10 +187,10 @@
                             <img src="img/seal.png" alt="">
                         </div>
                         <div class="offer-doc__res">
-                            <div class="res-block" v-if="discountPrecent">Итого:&nbsp;<span>{{offerPrice.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸</span></div>
+                            <div class="res-block" v-if="discountPrecent">Итого:&nbsp;<span>{{offerPrice.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸ {{periodText}}</span></div>
                             <div class="res-block" v-if="discountPrecent"> Скидка {{discountPrecent}} % :&nbsp;<span>{{(offerPrice / 100 * discountPrecent).toLocaleString('RU-ru')}}</span>&nbsp;₸</div>
                             <div class="res-block" v-if="projectDeadline">Срок разработки:&nbsp;<span>{{projectDeadline}} рабочих дней</span></div>
-                            <div class="res-block">Итоговая стоимость:&nbsp;<span>{{offerPriceWithDiscount.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸</spa>
+                            <div class="res-block">Итоговая стоимость:&nbsp;<span>{{offerPriceWithDiscount.toLocaleString('RU-ru')}}</span>&nbsp;<span>₸ {{periodText}}</spa>
                             </div>
                         </div>
                     </div>
@@ -222,6 +234,8 @@
                 serviceTitle: '',
                 serviceDescription: '',
                 servicePrice: '',
+                period: 'fix',
+                periodText: '',
                 toPrint: false,
             }
         },
@@ -229,6 +243,26 @@
             draggable
         },
         methods: {
+            setPeriodText() {
+                switch (this.period) {
+                    case 'fix':
+                        this.periodText = '';
+                        break;
+                    case 'year':
+                        this.periodText = '/ год';
+                        break;
+                    case 'month':
+                        this.periodText = '/ мес';
+                        break;
+                    default:
+                        break;
+                }
+            },
+            getPeriod(event) {
+                let period = event.target.value;
+                this.period = period;
+                this.setPeriodText();
+            },
 
             saveСhanges(service) {
                 this.calcResult()
