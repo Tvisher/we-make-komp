@@ -183,7 +183,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="offer-doc__descr cursive">* {{footnote}}</div>
+                    <div v-if="footnote.length" class="offer-doc__descr cursive">* {{footnote}}</div>
                     <div class="offer-doc__footer">
                         <span class="boss-name">
                             С уважением,<br>Натальчук Д.В.
